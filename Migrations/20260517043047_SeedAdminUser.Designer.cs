@@ -4,6 +4,7 @@ using GestionInventarioAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionInventarioAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260517043047_SeedAdminUser")]
+    partial class SeedAdminUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +84,7 @@ namespace GestionInventarioAPI.Migrations
                         {
                             Id = 1,
                             NombreUsuario = "admin",
-                            PasswordHash = "$2a$11$4nI00VwxKdn01D5rY4gd.eveu/eGL9iba2Sq2ifehn6/Ki8EFXKRm",
+                            PasswordHash = "$2a$11$7m6A1Y6K8M7uL6Qw5hM3uuhM6M0dJ5qP2y3H6Z9jS7rN8uD3Y0Q5K",
                             Rol = "Admin"
                         });
                 });

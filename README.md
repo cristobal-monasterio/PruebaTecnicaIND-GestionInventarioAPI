@@ -19,6 +19,7 @@ API REST desarrollada con ASP.NET Core Web API para la gestión de productos e im
 - Protección de endpoints mediante autorización
 - Persistencia de datos con Entity Framework Core
 - Documentación y pruebas mediante Swagger
+- Validaciones mediante Data Annotations
 
 ## Configuración del proyecto
 
@@ -40,7 +41,7 @@ Modificar:
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Data Source=SERVIDOR;Initial Catalog=Inventario;Integrated Security=True;TrustServerCertificate=True;"
+  "DefaultConnection": "Data Source=SERVIDOR;Initial Catalog=Inventario;IntegratedSecurity=True;TrustServerCertificate=True;"
 }
 ```
 
@@ -49,11 +50,12 @@ Modificar:
 Ejecutar migraciones:
 
 ```powershell
-Add-Migration InitialCreate
 Update-Database
 ```
 
-## Credenciales de prueba
+## Usuario administrador por defecto
+
+Al ejecutar las migraciones se crea automáticamente un usuario administrador para pruebas.
 
 Usuario:
 

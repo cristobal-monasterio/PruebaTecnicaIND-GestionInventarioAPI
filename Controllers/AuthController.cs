@@ -71,6 +71,6 @@ namespace GestionInventarioAPI.Controllers
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration
             });
-        }        
+        }       
     }
 }
