@@ -30,12 +30,18 @@ namespace GestionInventarioAPI.Controllers
                 .FirstOrDefaultAsync(u => u.NombreUsuario == request.NombreUsuario);
 
             if (usuario == null)
-                return Unauthorized("Usuario o contraseña incorrectos.");
+                return Unauthorized(new
+                {
+                    mensaje = "Usuario o contraseña incorrectos."
+                });
 
             bool passwordValida = BCrypt.Net.BCrypt.Verify(request.Password, usuario.PasswordHash);
 
             if (!passwordValida)
-                return Unauthorized("Usuario o contraseña incorrectos.");
+                return Unauthorized(new
+                {
+                    mensaje = "Usuario o contraseña incorrectos."
+                });
 
             var expiration = DateTime.UtcNow.AddMinutes(
                 Convert.ToDouble(_configuration["Jwt:ExpireMinutes"]));
@@ -65,28 +71,6 @@ namespace GestionInventarioAPI.Controllers
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration
             });
-        }
-
-        [HttpPost("seed")]
-        public async Task<IActionResult> SeedUser()
-        {
-            var existe = await _context.Usuarios
-                .AnyAsync(u => u.NombreUsuario == "admin");
-
-            if (existe)
-                return BadRequest("El usuario ya existe.");
-
-            var usuario = new Usuario
-            {
-                NombreUsuario = "admin",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin123*"),
-                Rol = "Admin"
-            };
-
-            _context.Usuarios.Add(usuario);
-            await _context.SaveChangesAsync();
-
-            return Ok("Usuario creado correctamente.");
-        }
+        }        
     }
 }
